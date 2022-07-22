@@ -1,0 +1,8 @@
+Package                   Version
+------------------------- -------
+altgraph                  0.17.2
+macholib                  1.16
+pip                       22.2
+pyinstaller               5.2
+pyinstaller-hooks-contrib 2022.8
+setuptools                60.10.0
