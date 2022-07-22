@@ -1,4 +1,4 @@
-# ipynb2html EXE
+# ipynb2html
 
 ![demo](https://github.com/dai-a/ipynb2html-EXE/wiki/images/output.gif)
 
