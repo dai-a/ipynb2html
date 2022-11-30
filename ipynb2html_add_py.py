@@ -21,7 +21,10 @@ def mypath():
     from pathlib import Path
       
     p = Path(sys.argv[0])
-    return p if p.suffix == ".exe" else p.parent
+    if p.suffix == ".exe" or p.suffix == ".py":
+        return p.parent
+    
+    return p
 
 # In[3]:
 

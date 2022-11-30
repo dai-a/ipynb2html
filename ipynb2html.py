@@ -11,7 +11,6 @@ import data_tpl
 from jinja2 import DictLoader
 from nbconvert import HTMLExporter
 
-
 # In[2]:
 
 
@@ -22,8 +21,10 @@ def mypath():
     from pathlib import Path
       
     p = Path(sys.argv[0])
-    return p if p.suffix == ".exe" else p.parent
-
+    if p.suffix == ".exe" or p.suffix == ".py":
+        return p.parent
+    
+    return p
 
 # In[3]:
 
@@ -60,7 +61,6 @@ outpath_notebooks = list(map(lambda x: x.replace('.ipynb','.html'),inpath_notebo
 for i in list(zip(inpath_notebooks,outpath_notebooks)):
     print('input and output files:',i)
 
-
 # # main
 
 # In[5]:
@@ -77,7 +77,6 @@ target_notebook_list = list(
                                                         inpath_notebooks)
                                         )
 
-
 # In[6]:
 
 
@@ -90,7 +89,6 @@ target_notebook_nb = list(map(lambda x:
 
 print(target_notebook_nb[0].cells[0])
 
-
 # In[7]:
 
 
@@ -98,7 +96,6 @@ print(target_notebook_nb[0].cells[0])
 dl = DictLoader(data_tpl.dict_tpl)
 exportHTML = HTMLExporter(template_name = 'classic', extra_loaders=[dl])
 exportHTML.template_file = 'toc2.tpl'
-
 
 # In[8]:
 
@@ -108,4 +105,3 @@ for notebook, outpath in zip(target_notebook_nb,outpath_notebooks):
     (body, resources) = exportHTML.from_notebook_node(notebook)
     with open(outpath,'w') as f:
         f.write(body)
-
