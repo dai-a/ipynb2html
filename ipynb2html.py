@@ -11,6 +11,7 @@ import data_tpl
 from jinja2 import DictLoader
 from nbconvert import HTMLExporter
 
+
 # In[2]:
 
 
@@ -26,8 +27,8 @@ def mypath():
     
     return p
 
-# In[3]:
 
+# In[3]:
 
 
 #pathの参照先を確認
@@ -61,6 +62,7 @@ outpath_notebooks = list(map(lambda x: x.replace('.ipynb','.html'),inpath_notebo
 for i in list(zip(inpath_notebooks,outpath_notebooks)):
     print('input and output files:',i)
 
+
 # # main
 
 # In[5]:
@@ -68,7 +70,7 @@ for i in list(zip(inpath_notebooks,outpath_notebooks)):
 
 # 変換元となるipynbをテキストとして読み込む
 def readFile(path):
-    with open(path, 'r') as f:
+    with open(path, 'r',encoding='utf-8') as f:
         return f.read()
 
 target_notebook_list = list(
@@ -76,6 +78,7 @@ target_notebook_list = list(
                                                         readFile(x),
                                                         inpath_notebooks)
                                         )
+
 
 # In[6]:
 
@@ -89,6 +92,7 @@ target_notebook_nb = list(map(lambda x:
 
 print(target_notebook_nb[0].cells[0])
 
+
 # In[7]:
 
 
@@ -97,11 +101,13 @@ dl = DictLoader(data_tpl.dict_tpl)
 exportHTML = HTMLExporter(template_name = 'classic', extra_loaders=[dl])
 exportHTML.template_file = 'toc2.tpl'
 
+
 # In[8]:
 
 
 # htmlファイルへ変換
 for notebook, outpath in zip(target_notebook_nb,outpath_notebooks):
     (body, resources) = exportHTML.from_notebook_node(notebook)
-    with open(outpath,'w') as f:
+    with open(outpath,'w',encoding='utf-8') as f:
         f.write(body)
+
